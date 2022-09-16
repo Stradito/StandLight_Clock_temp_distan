@@ -7,6 +7,7 @@
 #include "Controller.h"
 #include "DHT11.h"
 #include "DHT_Data.h"
+#include "UltraSonic.h"
 
 class Listener
 {
@@ -16,9 +17,10 @@ private :
     DHT11 *dht11;
     ClockCheck *clockCheck;
     Controller *controller;
+    UltraSonic *ultraSonic;
 
 public:
-    Listener(Button *powerButton, Button *modeButton, Controller *control, ClockCheck *clock, DHT11 *dht11);
+    Listener(Button *powerButton, Button *modeButton, Controller *control, ClockCheck *clock, DHT11 *dht11, UltraSonic *ultraSonic);
     ~Listener();
     void checkEvent();
 };
