@@ -100,5 +100,5 @@ void Service::updateDistance(int distance)
     }
     else {
         view->setState(LIGHT_OFF);
-    }c
+    }
 }
