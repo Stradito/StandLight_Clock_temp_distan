@@ -1,9 +1,11 @@
 #include "Listener.h"
 
-Listener::Listener(Button *powerButton, Button *modeButton, Controller *control, ClockCheck *clock, DHT11 *dht11 ,UltraSonic *ultraSonic)
+Listener::Listener(Button *powerButton, Button *modeButton, Button *playButton, Button *fanButton, Controller *control, ClockCheck *clock, DHT11 *dht11 ,UltraSonic *ultraSonic)
 {
     this->powerButton = powerButton;
     this->modeButton = modeButton;
+    this->playButton = playButton;
+    this->fanButton = fanButton;
     this->dht11 = dht11;
     controller = control;
     clockCheck = clock;
@@ -16,6 +18,8 @@ Listener::~Listener()
 
 void Listener::checkEvent()
 {
+    static int temp;
+
     if (modeButton->getState() == RELEASE_ACTIVE)
     {
         controller->updateEvent("modeButton");
@@ -25,6 +29,17 @@ void Listener::checkEvent()
     {
         controller->updateEvent("powerButton");
     }
+
+    if (playButton-> getState() == RELEASE_ACTIVE)
+    {
+        controller->updateEvent("playButton");
+    }
+
+    if (fanButton-> getState() == RELEASE_ACTIVE)
+    {
+        controller->updateFan("fanButton", temp);
+    }
+    controller->updateFan("Temp", temp);
     
 
     if (clockCheck->isUpdate())
@@ -38,11 +53,8 @@ void Listener::checkEvent()
         DHT_Data dhtData = dht11->readData();
         if (!dhtData.error)
         {
+            temp = dhtData.Temp;
             controller->updateTempHumid(dhtData);
-            if (dhtData.Temp >= 31)
-            {
-                controller->updateEvent("overTemp");
-            }
         }
     }
 
@@ -50,6 +62,6 @@ void Listener::checkEvent()
     if (millis() - prevUltraSonicTime > 1000) {
         prevUltraSonicTime = millis();
         int distance = ultraSonic->readDistance();
-        controller->updateDistance(distance);
+        controller->updateDistance(distance, temp);
     }
 }

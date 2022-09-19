@@ -2,6 +2,7 @@
 #define __LIGHTSTATE_H__
 
 enum {LIGHT_OFF, LIGHT_1, LIGHT_2, LIGHT_3, LIGHT_4, LIGHT_5};
-
+enum {BRIGHT, TIMER};
+enum {TIMER_RUN, TIMER_STOP, TIMER_FREEZE};
 
 #endif /* __LIGHTSTATE_H__ */

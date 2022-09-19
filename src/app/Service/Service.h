@@ -2,6 +2,7 @@
 #define __SERVICE_H__
 
 #include <string>
+#include <wiringPi.h>
 #include "View.h"
 #include "LightState.h"
 
@@ -9,6 +10,8 @@ class Service
 {
 private:
     int lightState;
+    int mode;
+    int timerMode;
     View *view;
     bool bDistanceLight;
 

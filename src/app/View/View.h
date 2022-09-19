@@ -4,13 +4,14 @@
 #include <string>
 #include "Led.h"
 #include "LightState.h"
-
 #include "LCD.h"
 
 class View
 {
 private:
     int lightState;
+    int mode;
+    int timerMode;
     Led *light1;
     Led *light2;
     Led *light3;
@@ -21,7 +22,7 @@ private:
 public:
     View(Led *led1, Led *led2, Led *led3, Led *led4, Led *led5, LCD *lcd);
     virtual ~View();
-    void setState(int state);
+    void setState(int mode, int lightState, int timerMode);
     void lightView();
     void lightOff();
     void lightOn_1();
@@ -29,6 +30,7 @@ public:
     void lightOn_3();
     void lightOn_4();
     void lightOn_5();
+    void timerLcd();
 };
 
 #endif /* __VIEW_H__ */
