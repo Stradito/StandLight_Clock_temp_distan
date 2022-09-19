@@ -176,6 +176,6 @@ void View::timerLcd()
         freeze = 1;
         break;
     }
-    sprintf(buff, "%02d:%02d:%02d", time / 3600, (time / 60)%3600, time % 60);
+    sprintf(buff, "%02d:%02d:%02d", time / 3600, (time / 60)%60, time % 60);
     lcd->WriteStringXY(0, 0, buff);
 }
